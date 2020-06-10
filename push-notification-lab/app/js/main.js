@@ -27,7 +27,7 @@ const app = (() => {
     return;
   }
 
-  Notifi+cation.requestPermission(status => {
+  Notification.requestPermission(status => {
     console.log('Notification permission status:', status);    
   })
 
