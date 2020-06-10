@@ -22,14 +22,37 @@ const app = (() => {
   const notifyButton = document.querySelector('.js-notify-btn');
   const pushButton = document.querySelector('.js-push-btn');
 
-  // TODO 2.1 - check for notification support
+  if (!('Notification' in window)) {
+    console.log('This browser does not support notifications!');
+    return;
+  }
 
-  // TODO 2.2 - request permission to show notifications
+  Notifi+cation.requestPermission(status => {
+    console.log('Notification permission status:', status);    
+  })
+
 
   function displayNotification() {
+    if (Notification.permission == 'granted') {
+      navigator.serviceWorker.getRegistration().then(reg => {
 
-    // TODO 2.3 - display a Notification
+        const options = {
+          body: 'First notification!',
+          icon: 'images/notification-flat.png',
+          vibrate: [100, 50, 100],
+          data: {
+            dateOfArrival: Date.now(),
+            primaryKey: 1
+          },
 
+          // TODO 2.5 - add actions to the notification
+
+          // TODO 5.1 - add a tag to the notification
+
+        };
+        reg.showNotification('Hello world!', options);
+      });
+    }
   }
 
   function initializeUI() {
